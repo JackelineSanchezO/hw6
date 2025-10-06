@@ -7,8 +7,6 @@ Original file is located at
     https://colab.research.google.com/drive/1cuREIv1oxnRiOIJZAgaNYyNJgGh6d_se
 """
 
-!pip install streamlit plotly panda requests
-!npm install -g localtunnel
 
 # Commented out IPython magic to ensure Python compatibility.
 # %%writefile app.py
@@ -18,9 +16,9 @@ Original file is located at
 # import requests
 # from io import StringIO
 # 
-# st.title("Global GDP Comparison App 🌍")
+# st.title("GDP App ")
 # 
-# # Dropdown for data source
+
 # source = st.selectbox("Select Data Source", ["IMF", "UN", "World Bank"])
 # 
 # URL = "https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal)"
@@ -31,7 +29,7 @@ Original file is located at
 # response = requests.get(URL, headers=headers)
 # dfs = pd.read_html(StringIO(response.text), flavor="bs4")
 # 
-# # Pick the correct table depending on source
+
 # target_table = None
 # for df in dfs:
 #     if source in str(df.columns):
@@ -53,7 +51,7 @@ Original file is located at
 #         .astype(float)
 #     )
 # 
-#     # Dummy region grouping (for demo)
+
 #     regions = ["Asia", "Europe", "Africa", "Americas", "Oceania"]
 #     table["Region"] = [regions[i % len(regions)] for i in range(len(table))]
 # 

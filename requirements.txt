@@ -3,3 +3,5 @@ streamlit
 plotly
 pandas
 requests
+html5lib
+lxml

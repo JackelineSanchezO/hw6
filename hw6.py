@@ -13,12 +13,12 @@ import plotly.express as px
 import requests
 from io import StringIO
 
- st.title("GDP App ")
-# 
+st.title("GDP App ")
+ 
 
- source = st.selectbox("Select Data Source", ["IMF", "UN", "World Bank"])
+source = st.selectbox("Select Data Source", ["IMF", "UN", "World Bank"])
 # 
- URL = "https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal)"
+URL = "https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal)"
 headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
 }

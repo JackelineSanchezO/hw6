@@ -31,7 +31,7 @@ target_table = None
 for df in dfs:
     if source in str(df.columns):
          target_table = df
-        break
+    break
 # 
 if target_table is None:
    st.error(f"Could not find {source} GDP table.")

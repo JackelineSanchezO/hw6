@@ -60,7 +60,7 @@ else:
         labels={f"GDP_{source}": "GDP (millions USD)"}
     )
 # 
-  st.plotly_chart(fig)
+st.plotly_chart(fig)
 # 
 #
 

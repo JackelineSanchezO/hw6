@@ -7,65 +7,61 @@ Original file is located at
     https://colab.research.google.com/drive/1cuREIv1oxnRiOIJZAgaNYyNJgGh6d_se
 """
 
+%%writefile app.py
+import streamlit as st
+import pandas as pd
+import plotly.express as px
+ import requests
+from io import StringIO
 
-# Commented out IPython magic to ensure Python compatibility.
-# %%writefile app.py
-# import streamlit as st
-# import pandas as pd
-# import plotly.express as px
-# import requests
-# from io import StringIO
-# 
-# st.title("GDP App ")
+ st.title("GDP App ")
 # 
 
-# source = st.selectbox("Select Data Source", ["IMF", "UN", "World Bank"])
+ source = st.selectbox("Select Data Source", ["IMF", "UN", "World Bank"])
 # 
-# URL = "https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal)"
-# headers = {
-#     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
-# }
+ URL = "https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal)"
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+}
 # 
-# response = requests.get(URL, headers=headers)
-# dfs = pd.read_html(StringIO(response.text), flavor="bs4")
-# 
-
-# target_table = None
-# for df in dfs:
-#     if source in str(df.columns):
-#         target_table = df
-#         break
-# 
-# if target_table is None:
-#     st.error(f"Could not find {source} GDP table.")
-# else:
-#     # Clean up
-#     cols = [c for c in target_table.columns if "Country" in str(c) or source in str(c)]
-#     table = target_table[cols].copy()
-#     table.columns = ["Country", f"GDP_{source}"]
-#     table[f"GDP_{source}"] = (
-#         table[f"GDP_{source}"]
-#         .astype(str)
-#         .str.replace(",", "")
-#         .str.extract(r"(\d+)", expand=False)
-#         .astype(float)
-#     )
+response = requests.get(URL, headers=headers)
+dfs = pd.read_html(StringIO(response.text), flavor="bs4")
 # 
 
-#     regions = ["Asia", "Europe", "Africa", "Americas", "Oceania"]
-#     table["Region"] = [regions[i % len(regions)] for i in range(len(table))]
+target_table = None
+for df in dfs:
+    if source in str(df.columns):
+         target_table = df
+        break
 # 
-#     # Plot
-#     fig = px.bar(
-#         table,
-#         x="Region",
-#         y=f"GDP_{source}",
-#         color="Country",
-#         title=f"{source} GDP by Country (Stacked by Region)",
-#         labels={f"GDP_{source}": "GDP (millions USD)"}
-#     )
+if target_table is None:
+   st.error(f"Could not find {source} GDP table.")
+else:
+     cols = [c for c in target_table.columns if "Country" in str(c) or source in str(c)]
+     table = target_table[cols].copy()
+     table.columns = ["Country", f"GDP_{source}"]
+    table[f"GDP_{source}"] = (
+        table[f"GDP_{source}"]
+        .astype(str)
+         .str.replace(",", "")
+         .str.extract(r"(\d+)", expand=False)
+        .astype(float)
+     )
 # 
-#     st.plotly_chart(fig)
+
+     regions = ["Asia", "Europe", "Africa", "Americas", "Oceania"]
+     table["Region"] = [regions[i % len(regions)] for i in range(len(table))]
+
+     fig = px.bar(
+         table,
+         x="Region",
+         y=f"GDP_{source}",
+        color="Country",
+        title=f"{source} GDP by Country (Stacked by Region)",
+        labels={f"GDP_{source}": "GDP (millions USD)"}
+    )
+# 
+  st.plotly_chart(fig)
 # 
 #
 

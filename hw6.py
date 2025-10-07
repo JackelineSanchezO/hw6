@@ -10,7 +10,7 @@ Original file is located at
 import streamlit as st
 import pandas as pd
 import plotly.express as px
- import requests
+import requests
 from io import StringIO
 
  st.title("GDP App ")

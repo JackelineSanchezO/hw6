@@ -39,7 +39,7 @@ else:
      cols = [c for c in target_table.columns if "Country" in str(c) or source in str(c)]
      table = target_table[cols].copy()
      table.columns = ["Country", f"GDP_{source}"]
-    table[f"GDP_{source}"] = (
+     table[f"GDP_{source}"] = (
         table[f"GDP_{source}"]
         .astype(str)
          .str.replace(",", "")
